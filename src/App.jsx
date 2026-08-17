@@ -48,8 +48,8 @@ function App() {
 
       <AnimatePresence mode="wait">
         {stage === 'intro' && (
-          <motion.div key="intro" exit={{ opacity: 0, filter: 'blur(10px)' }} transition={{ duration: 1 }}>
-            <IntroScreen onOpen={handleOpenSurprise} />
+          <motion.div key="intro" exit={{ opacity: 0, filter: 'blur(10px)', scale: 1.05 }} transition={{ duration: 1.5 }}>
+            <IntroScreen onOpen={handleOpenSurprise} birthDate={birthdayConfig.birthDate} />
           </motion.div>
         )}
 

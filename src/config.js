@@ -3,6 +3,7 @@ const memoryPhotos = Object.values(memoryModules).map(module => module.default);
 
 export const birthdayConfig = {
   motherName: "Mom",
+  birthDate: "1971.08.20",
   personalMessage: `Dear Mom,
 
 Happy Birthday to the most special person in my life.

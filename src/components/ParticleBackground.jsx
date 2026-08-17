@@ -5,53 +5,76 @@ const ParticleBackground = () => {
   const [particles, setParticles] = useState([]);
 
   useEffect(() => {
-    // Generate particles only on client side to avoid hydration issues
-    const particleCount = 40;
+    const particleCount = 60;
     const newParticles = Array.from({ length: particleCount }).map((_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
-      size: Math.random() * 3 + 1,
-      duration: Math.random() * 20 + 10,
-      delay: Math.random() * 5,
+      size: Math.random() * 4 + 1,
+      duration: Math.random() * 30 + 15,
+      delay: Math.random() * 10,
+      opacity: Math.random() * 0.3 + 0.1,
     }));
     setParticles(newParticles);
   }, []);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" style={{ background: 'var(--color-bg-dark)' }}>
-      {/* Background Gradient */}
-      <div 
-        className="absolute inset-0 opacity-50"
-        style={{
-          background: 'radial-gradient(circle at 50% 50%, #1e1b4b 0%, var(--color-bg-dark) 100%)'
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#030712]">
+      {/* Animated Gradient Background */}
+      <motion.div 
+        className="absolute inset-0 opacity-40 mix-blend-screen"
+        animate={{
+          background: [
+            'radial-gradient(circle at 0% 0%, #4c1d95 0%, transparent 50%)',
+            'radial-gradient(circle at 100% 100%, #831843 0%, transparent 50%)',
+            'radial-gradient(circle at 0% 100%, #1e1b4b 0%, transparent 50%)',
+            'radial-gradient(circle at 100% 0%, #4c1d95 0%, transparent 50%)',
+            'radial-gradient(circle at 0% 0%, #4c1d95 0%, transparent 50%)',
+          ]
         }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+      />
+      <motion.div 
+        className="absolute inset-0 opacity-30 mix-blend-screen"
+        animate={{
+          background: [
+            'radial-gradient(circle at 100% 50%, #9d174d 0%, transparent 60%)',
+            'radial-gradient(circle at 0% 50%, #4c1d95 0%, transparent 60%)',
+            'radial-gradient(circle at 100% 50%, #9d174d 0%, transparent 60%)',
+          ]
+        }}
+        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
       />
       
       {/* Particles */}
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute rounded-full bg-white opacity-20"
+          className="absolute rounded-full bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)]"
           style={{
             left: `${particle.x}%`,
             top: `${particle.y}%`,
             width: particle.size,
             height: particle.size,
-            boxShadow: '0 0 10px rgba(255,255,255,0.5)',
+            opacity: particle.opacity,
           }}
           animate={{
-            y: [0, -100, 0],
-            opacity: [0.1, 0.5, 0.1],
+            y: [0, -150, 0],
+            x: [0, Math.random() * 50 - 25, 0],
+            opacity: [particle.opacity, particle.opacity * 2, particle.opacity],
+            scale: [1, 1.5, 1],
           }}
           transition={{
             duration: particle.duration,
             repeat: Infinity,
-            ease: "linear",
+            ease: "easeInOut",
             delay: particle.delay,
           }}
         />
       ))}
+      
+      {/* Vignette Overlay for cinematic depth */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)]" />
     </div>
   );
 };

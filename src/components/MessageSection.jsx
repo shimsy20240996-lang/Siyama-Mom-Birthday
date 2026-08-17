@@ -5,43 +5,38 @@ const MessageSection = ({ message }) => {
   const paragraphs = message.split('\n').filter(p => p.trim() !== '');
 
   return (
-    <div id="message" className="section-container min-h-screen py-20">
+    <div id="message" className="section-container min-h-screen py-24 relative">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 1 }}
-        className="w-full max-w-4xl px-4"
+        transition={{ duration: 1.5 }}
+        className="max-w-4xl w-full mx-auto p-10 md:p-16 rounded-3xl bg-white/5 backdrop-blur-3xl border border-white/10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] relative overflow-hidden group"
       >
-        <h2 className="text-3xl md:text-5xl font-serif text-center mb-12 text-pink-300 leading-relaxed">
-          To the woman who made my world beautiful...
-        </h2>
+        <div className="absolute top-0 right-0 w-64 h-64 bg-pink-500/10 rounded-full blur-[100px] group-hover:bg-pink-500/20 transition-colors duration-700" />
         
-        <div className="glass-card-light text-gray-800 p-8 md:p-12 rounded-2xl shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 p-6 opacity-20 text-6xl text-pink-400">
-            &quot;
-          </div>
-          
-          <div className="relative z-10 space-y-6 text-lg md:text-xl font-serif leading-relaxed">
-            {paragraphs.map((para, index) => (
-              <motion.p
-                key={index}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.3, duration: 0.8 }}
-              >
-                {para}
-              </motion.p>
-            ))}
-          </div>
+        <h2 className="text-4xl md:text-5xl font-serif text-pink-200 mb-12 drop-shadow-md text-center">To the woman who made my world beautiful...</h2>
+        
+        <div className="relative z-10 space-y-8">
+          {paragraphs.map((paragraph, index) => (
+            <motion.p 
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.2, duration: 1 }}
+              className="text-xl md:text-2xl text-gray-200 leading-relaxed font-sans font-light"
+            >
+              {paragraph}
+            </motion.p>
+          ))}
           
           <motion.div 
-            className="mt-12 text-right font-serif text-xl italic text-pink-800"
+            className="mt-12 pt-8 border-t border-white/10 text-right font-serif text-2xl italic text-pink-300"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: paragraphs.length * 0.3 + 0.5, duration: 1 }}
+            transition={{ delay: paragraphs.length * 0.2 + 0.5, duration: 1 }}
           >
             With all my love ❤️
           </motion.div>
