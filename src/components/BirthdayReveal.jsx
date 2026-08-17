@@ -35,9 +35,9 @@ const BirthdayReveal = ({ onContinue }) => {
         >
           <button 
             onClick={onContinue}
-            className="btn-secondary tracking-widest text-sm uppercase mx-auto"
+            className="btn-primary tracking-wide text-sm mx-auto"
           >
-            Continue ↓
+            Continue &rarr;
           </button>
         </motion.div>
       </motion.div>
