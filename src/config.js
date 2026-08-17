@@ -1,3 +1,6 @@
+const memoryModules = import.meta.glob('./assets/memories/*.{jpg,JPG,jpeg,png}', { eager: true });
+const memoryPhotos = Object.values(memoryModules).map(module => module.default);
+
 export const birthdayConfig = {
   motherName: "Mom",
   personalMessage: `Dear Mom,
@@ -12,32 +15,19 @@ I may grow older, but I'll always be your child.
 
 I love you, Mom. ❤️`,
   finalMessage: "My biggest wish is to have you with me for many, many more birthdays. ❤️\nYou deserve the whole universe, Mom.",
-  photos: [
-    {
-      url: "https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=600&auto=format&fit=crop",
-      caption: "One of my favorite memories ❤️"
-    },
-    {
-      url: "https://images.unsplash.com/photo-1499557402739-c1bc3d9b0126?q=80&w=600&auto=format&fit=crop",
-      caption: "Always a beautiful moment."
-    },
-    {
-      url: "https://images.unsplash.com/photo-1544485303-3c220f18d79f?q=80&w=600&auto=format&fit=crop",
-      caption: "Forever grateful for this."
-    },
-    {
-      url: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=600&auto=format&fit=crop",
-      caption: "Your beautiful smile 😊"
-    },
-    {
-      url: "https://images.unsplash.com/photo-1513256193740-d94fb4e0b503?q=80&w=600&auto=format&fit=crop",
-      caption: "A day to remember ✨"
-    },
-    {
-      url: "https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?q=80&w=600&auto=format&fit=crop",
-      caption: "So much love 🤍"
-    }
-  ],
+  photos: memoryPhotos.map((url, index) => ({
+    url: url,
+    caption: [
+      "One of my favorite memories ❤️",
+      "Always a beautiful moment.",
+      "Forever grateful for this.",
+      "Your beautiful smile 😊",
+      "A day to remember ✨",
+      "So much love 🤍",
+      "Cherished moments ❤️",
+      "Beautiful times together ✨"
+    ][index % 8] // Cycle through captions
+  })),
   reasons: [
     {
       title: "Your Kindness 🌷",
