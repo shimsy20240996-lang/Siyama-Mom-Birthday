@@ -56,11 +56,11 @@ const FinalCelebration = ({ onReplay }) => {
 
         <motion.button 
           onClick={onReplay}
-          className="text-white border-2 border-white/50 rounded-full px-8 py-4 hover:bg-white/20 transition-all font-sans tracking-widest text-sm uppercase flex items-center justify-center mx-auto gap-3"
+          className="btn-primary tracking-widest text-sm uppercase mx-auto"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          Replay My Surprise <span>↻</span>
+          Replay My Surprise <span className="text-xl">↻</span>
         </motion.button>
       </motion.div>
     </div>

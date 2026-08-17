@@ -35,7 +35,7 @@ const BirthdayReveal = ({ onContinue }) => {
         >
           <button 
             onClick={onContinue}
-            className="text-pink-200 border border-pink-400/50 rounded-full px-8 py-3 hover:bg-pink-400/20 transition-all font-sans tracking-widest text-sm uppercase"
+            className="btn-secondary tracking-widest text-sm uppercase mx-auto"
           >
             Continue ↓
           </button>
