@@ -4,7 +4,7 @@ const memoryPhotos = Object.values(memoryModules).map(module => module.default);
 export const birthdayConfig = {
   motherName: "Mom",
   birthDate: "1971.08.20",
-  music: "https://upload.wikimedia.org/wikipedia/commons/0/02/Happy_Birthday_to_You.ogg",
+  music: "https://www.youtube.com/watch?v=_z-1fTlSDF0",
   personalMessage: `Dear Mom,
 
 Happy Birthday to the most special person in my life.
