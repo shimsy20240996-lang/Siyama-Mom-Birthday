@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Music, Music4 } from 'lucide-react';
-import ReactPlayer from 'react-player/youtube';
+import ReactPlayer from 'react-player';
 
 const MusicToggle = ({ musicUrl }) => {
   const [isPlaying, setIsPlaying] = useState(false);
