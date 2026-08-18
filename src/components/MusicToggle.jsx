@@ -12,13 +12,15 @@ const MusicToggle = ({ musicUrl }) => {
 
   return (
     <>
-      {/* Hidden YouTube Player */}
-      <div style={{ display: 'none' }}>
+      {/* Hidden YouTube Player (Cannot use display:none or YouTube will block it) */}
+      <div className="absolute opacity-0 pointer-events-none w-[10px] h-[10px] overflow-hidden -z-50">
         <ReactPlayer 
           url={musicUrl || "https://www.youtube.com/watch?v=_z-1fTlSDF0"} 
           playing={isPlaying} 
           loop={true}
           volume={0.5}
+          width="10px"
+          height="10px"
         />
       </div>
 
