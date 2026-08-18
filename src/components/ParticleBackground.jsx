@@ -19,28 +19,28 @@ const ParticleBackground = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#030712]">
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-transparent">
       {/* Animated Gradient Background */}
       <motion.div 
-        className="absolute inset-0 opacity-40 mix-blend-screen"
+        className="absolute inset-0 opacity-60 mix-blend-overlay"
         animate={{
           background: [
-            'radial-gradient(circle at 0% 0%, #4c1d95 0%, transparent 50%)',
-            'radial-gradient(circle at 100% 100%, #831843 0%, transparent 50%)',
-            'radial-gradient(circle at 0% 100%, #1e1b4b 0%, transparent 50%)',
-            'radial-gradient(circle at 100% 0%, #4c1d95 0%, transparent 50%)',
-            'radial-gradient(circle at 0% 0%, #4c1d95 0%, transparent 50%)',
+            'radial-gradient(circle at 0% 0%, #F4D9D0 0%, transparent 50%)',
+            'radial-gradient(circle at 100% 100%, #E3B7AD 0%, transparent 50%)',
+            'radial-gradient(circle at 0% 100%, #F2DCD4 0%, transparent 50%)',
+            'radial-gradient(circle at 100% 0%, #F4D9D0 0%, transparent 50%)',
+            'radial-gradient(circle at 0% 0%, #F4D9D0 0%, transparent 50%)',
           ]
         }}
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
       />
       <motion.div 
-        className="absolute inset-0 opacity-30 mix-blend-screen"
+        className="absolute inset-0 opacity-40 mix-blend-multiply"
         animate={{
           background: [
-            'radial-gradient(circle at 100% 50%, #9d174d 0%, transparent 60%)',
-            'radial-gradient(circle at 0% 50%, #4c1d95 0%, transparent 60%)',
-            'radial-gradient(circle at 100% 50%, #9d174d 0%, transparent 60%)',
+            'radial-gradient(circle at 100% 50%, #E3B7AD 0%, transparent 60%)',
+            'radial-gradient(circle at 0% 50%, #F4D9D0 0%, transparent 60%)',
+            'radial-gradient(circle at 100% 50%, #E3B7AD 0%, transparent 60%)',
           ]
         }}
         transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
@@ -73,8 +73,8 @@ const ParticleBackground = () => {
         />
       ))}
       
-      {/* Vignette Overlay for cinematic depth */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)]" />
+      {/* Soft Vignette Overlay */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(108,76,74,0.05)_100%)]" />
     </div>
   );
 };

@@ -33,10 +33,10 @@ const WishSection = ({ finalMessage, onComplete }) => {
               exit={{ opacity: 0, y: -50 }}
               transition={{ duration: 1 }}
             >
-              <h2 className="text-4xl md:text-6xl font-serif text-white mb-6">
-                Make a Wish, Mom 🎂
+              <h2 className="text-4xl md:text-6xl font-serif text-[#6C4C4A] mb-6">
+                Make a Wish, Siyama 🎂
               </h2>
-              <p className="text-xl text-pink-200 mb-16 italic">
+              <p className="text-xl text-[#8E706B] mb-16 italic">
                 Close your eyes, make a wish, and blow out the candles...
               </p>
 

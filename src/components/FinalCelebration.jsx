@@ -9,7 +9,7 @@ const FinalCelebration = ({ onReplay }) => {
     // Fire confetti fireworks
     const duration = 15 * 1000;
     const animationEnd = Date.now() + duration;
-    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0, colors: ['#AD7466', '#F4D9D0', '#E3B7AD', '#6C4C4A'] };
 
     const randomInRange = (min, max) => Math.random() * (max - min) + min;
 
@@ -34,20 +34,20 @@ const FinalCelebration = ({ onReplay }) => {
   }, []);
 
   return (
-    <div className="section-container min-h-screen flex items-center justify-center relative overflow-hidden bg-[#030712]">
+    <div className="section-container min-h-screen flex items-center justify-center relative overflow-hidden bg-transparent">
       {/* Background gradients */}
-      <div className="absolute inset-0 bg-gradient-to-t from-pink-900/20 to-transparent" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-pink-600/10 rounded-full blur-[120px]" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#E3B7AD]/40 to-transparent" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#F4D9D0]/40 rounded-full blur-[120px]" />
       
       {showContent && (
         <motion.div
           initial={{ opacity: 0, scale: 0.9, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1.5, type: "spring", bounce: 0.4 }}
-          className="text-center z-10 p-12 md:p-20 rounded-3xl bg-white/5 backdrop-blur-2xl border border-white/10 shadow-[0_0_50px_rgba(244,114,182,0.15)] max-w-4xl mx-auto w-full relative overflow-hidden"
+          className="text-center z-10 p-12 md:p-20 rounded-3xl bg-[#FFF9F5]/80 backdrop-blur-md border border-[#E5C1B8] shadow-xl max-w-4xl mx-auto w-full relative overflow-hidden"
         >
           <motion.h1 
-            className="text-6xl md:text-8xl font-serif text-white mb-6 drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+            className="text-6xl md:text-8xl font-serif text-[#6C4C4A] mb-6 drop-shadow-sm"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
@@ -55,7 +55,7 @@ const FinalCelebration = ({ onReplay }) => {
             Happy Birthday!
           </motion.h1>
           <motion.p 
-            className="text-2xl md:text-3xl text-pink-200 font-sans tracking-wide mb-12 font-light"
+            className="text-2xl md:text-3xl text-[#8E706B] font-sans tracking-wide mb-12 font-medium"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1 }}
@@ -70,7 +70,7 @@ const FinalCelebration = ({ onReplay }) => {
           >
             <motion.button 
               onClick={onReplay}
-              className="btn-primary tracking-wide text-sm mx-auto shadow-[0_0_30px_rgba(244,114,182,0.3)]"
+              className="btn-primary tracking-wide text-sm mx-auto shadow-lg"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

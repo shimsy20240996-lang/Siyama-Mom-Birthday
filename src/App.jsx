@@ -81,29 +81,30 @@ function App() {
             <div id="home" className="pt-10">
               
               <motion.div 
-            initial={{ opacity: 0, scale: 0.9, y: 50 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 1.5, type: "spring", bounce: 0.4 }}
-            className="text-center z-10 p-12 md:p-20 rounded-3xl bg-white/5 backdrop-blur-2xl border border-white/10 shadow-[0_0_50px_rgba(255,255,255,0.05)] max-w-4xl mx-auto w-full relative overflow-hidden mt-10 mb-20"
-          >
-            <div className="absolute -top-32 -left-32 w-64 h-64 bg-pink-500/20 rounded-full blur-[80px]" />
-            <div className="absolute -bottom-32 -right-32 w-64 h-64 bg-purple-500/20 rounded-full blur-[80px]" />
+                initial={{ opacity: 0, scale: 0.9, y: 50 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 1.5, type: "spring", bounce: 0.4 }}
+                className="text-center z-10 p-12 md:p-20 rounded-3xl bg-white/40 backdrop-blur-md border border-white/60 shadow-[0_20px_50px_rgba(108,76,74,0.1)] max-w-4xl mx-auto w-full relative overflow-hidden mt-10 mb-20"
+              >
+                {/* Soft decorative blur orbs */}
+                <div className="absolute -top-32 -left-32 w-64 h-64 bg-[#E3B7AD]/40 rounded-full blur-[80px]" />
+                <div className="absolute -bottom-32 -right-32 w-64 h-64 bg-[#F4D9D0]/40 rounded-full blur-[80px]" />
 
-            <h1 className="text-5xl md:text-7xl font-serif text-white mb-6 leading-tight relative z-10">
-              Happy Birthday,<br/> <span className="bg-gradient-to-r from-pink-400 to-rose-300 text-transparent bg-clip-text text-6xl md:text-8xl mt-6 inline-block font-bold">Mom ❤️</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-300 font-sans tracking-wide mb-16 font-light relative z-10">
-              Today is all about you. Est. {birthdayConfig.birthDate}
-            </p>
+                <h1 className="text-5xl md:text-7xl font-serif text-[#6C4C4A] mb-6 leading-tight relative z-10">
+                  Happy Birthday,<br/> <span className="text-[#AD7466] text-6xl md:text-8xl mt-6 inline-block font-bold">Siyama ❤️</span>
+                </h1>
+                <p className="text-xl md:text-2xl text-[#8E706B] font-sans tracking-wide mb-16 font-light relative z-10">
+                  Today is all about you. Est. {birthdayConfig.birthDate}
+                </p>
+              </motion.div>
+
+              <MessageSection message={birthdayConfig.personalMessage} />
+              <MemoryGallery photos={birthdayConfig.photos} />
+              <LoveReasons reasons={birthdayConfig.reasons} />
+              <WishSection finalMessage={birthdayConfig.finalMessage} onComplete={handleCompleteWish} />
+            </div>
           </motion.div>
-
-          <MessageSection message={birthdayConfig.personalMessage} />
-          <MemoryGallery photos={birthdayConfig.photos} />
-          <LoveReasons reasons={birthdayConfig.reasons} />
-          <WishSection finalMessage={birthdayConfig.finalMessage} onComplete={handleCompleteWish} />
-        </div>
-      </motion.div>
-      )}
+        )}
       </AnimatePresence>
 
       {showFinal && (

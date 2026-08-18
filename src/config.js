@@ -2,21 +2,19 @@ const memoryModules = import.meta.glob('./assets/memories/*.{jpg,JPG,jpeg,png}',
 const memoryPhotos = Object.values(memoryModules).map(module => module.default);
 
 export const birthdayConfig = {
-  motherName: "Mom",
+  motherName: "Siyama",
   birthDate: "1971.08.20",
   music: import.meta.env.BASE_URL + "happy-birthday.mp3",
-  personalMessage: `Dear Mom,
+  personalMessage: `Dear Siyama,
 
 Happy Birthday to the most special person in my life.
 
-Thank you for every sacrifice, every prayer, every smile, every lesson, and every moment you've been there for me.
+I wanted to make something truly unique to celebrate you today. This website is a small reflection of all the beautiful memories we've shared, the endless love you've given me, and the wonderful person you are.
 
-No words will ever be enough to explain how much you mean to me.
+Thank you for your infinite patience, your warm hugs, and for always being my greatest supporter.
 
-I may grow older, but I'll always be your child.
-
-I love you, Mom. ❤️`,
-  finalMessage: "My biggest wish is to have you with me for many, many more birthdays. ❤️\nYou deserve the whole universe, Mom.",
+May this year bring you as much joy and happiness as you bring to everyone around you.`,
+  finalMessage: "My biggest wish is to have you with me for many, many more birthdays. ❤️\nYou deserve the whole universe, Siyama.",
   photos: memoryPhotos.map((url, index) => ({
     url: url,
     caption: [

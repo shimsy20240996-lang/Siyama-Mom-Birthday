@@ -20,19 +20,17 @@
   padding: 0;
 }
 
-body {
-  margin: 0;
-  font-family: var(--font-sans);
-  background-color: var(--color-bg-dark);
-  color: var(--color-text-light);
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@layer base {
+  body {
+    @apply bg-[#FDF6F3] text-[#6C4C4A] antialiased min-h-screen font-sans;
+    background: linear-gradient(to bottom, #FDF6F3, #F2DCD4);
+    overflow-x: hidden;
+  }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-serif);
-  font-weight: 600;
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+    font-weight: 600;
+  }
 }
 
 button {
