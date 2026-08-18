@@ -8,7 +8,6 @@ import LoveReasons from './components/LoveReasons';
 import WishSection from './components/WishSection';
 import FinalCelebration from './components/FinalCelebration';
 import MusicToggle from './components/MusicToggle';
-import FloatingNavigation from './components/FloatingNavigation';
 import './App.css';
 
 function App() {
@@ -34,8 +33,7 @@ function App() {
       <MusicToggle musicUrl={birthdayConfig.music} />
 
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
-        <div id="home" className="pt-20">
-          <FloatingNavigation />
+        <div id="home" className="pt-10">
           
           <motion.div 
             initial={{ opacity: 0, scale: 0.9, y: 50 }}
