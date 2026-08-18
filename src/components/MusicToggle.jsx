@@ -1,22 +1,27 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Music, Music4 } from 'lucide-react';
-import ReactPlayer from 'react-player';
 
 const MusicToggle = ({ musicUrl, isPlaying, onToggle }) => {
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.play().catch(e => console.error("Audio play failed:", e));
+      } else {
+        audioRef.current.pause();
+      }
+    }
+  }, [isPlaying]);
+
   return (
     <>
-      {/* Hidden YouTube Player (Cannot use display:none or YouTube will block it) */}
-      <div className="absolute opacity-0 pointer-events-none w-[10px] h-[10px] overflow-hidden -z-50">
-        <ReactPlayer 
-          url={musicUrl || "https://www.youtube.com/watch?v=_z-1fTlSDF0"} 
-          playing={isPlaying} 
-          loop={true}
-          volume={0.5}
-          width="10px"
-          height="10px"
-        />
-      </div>
+      <audio 
+        ref={audioRef}
+        src={musicUrl || "/Siyama-Mom-Birthday/happy-birthday.mp3"} 
+        loop
+      />
 
       <motion.button
         initial={{ opacity: 0 }}
