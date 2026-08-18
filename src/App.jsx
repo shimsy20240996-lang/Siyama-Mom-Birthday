@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { birthdayConfig } from './config';
 import ParticleBackground from './components/ParticleBackground';
@@ -11,6 +11,10 @@ import FinalCelebration from './components/FinalCelebration';
 import MusicToggle from './components/MusicToggle';
 import './App.css';
 
+// Global audio instance so we can play it synchronously
+const globalAudio = new Audio(birthdayConfig.music);
+globalAudio.loop = true;
+
 function App() {
   const [showFinal, setShowFinal] = useState(false);
   const [hasEntered, setHasEntered] = useState(false);
@@ -19,6 +23,11 @@ function App() {
   useEffect(() => {
     // Add smooth scrolling style
     document.documentElement.style.scrollBehavior = 'smooth';
+    
+    // Clean up
+    return () => {
+      globalAudio.pause();
+    };
   }, []);
 
   const handleCompleteWish = () => {
@@ -30,20 +39,32 @@ function App() {
     setShowFinal(false);
     setHasEntered(false);
     setIsMusicPlaying(false);
+    globalAudio.pause();
+    globalAudio.currentTime = 0;
   };
 
   const handleEnter = () => {
     setHasEntered(true);
-    setIsMusicPlaying(true); // Start music when they click Happy Birthday
+    setIsMusicPlaying(true); 
+    // START MUSIC SYNCHRONOUSLY ON CLICK
+    globalAudio.play().catch(e => console.error("Audio play blocked:", e));
+  };
+
+  const toggleMusic = () => {
+    if (isMusicPlaying) {
+      globalAudio.pause();
+    } else {
+      globalAudio.play().catch(e => console.error("Audio play blocked:", e));
+    }
+    setIsMusicPlaying(!isMusicPlaying);
   };
 
   return (
     <div className="app-container">
       <ParticleBackground />
       <MusicToggle 
-        musicUrl={birthdayConfig.music} 
         isPlaying={isMusicPlaying}
-        onToggle={() => setIsMusicPlaying(!isMusicPlaying)}
+        onToggle={toggleMusic}
       />
 
       <AnimatePresence mode="wait">
