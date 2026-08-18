@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { birthdayConfig } from './config';
 import ParticleBackground from './components/ParticleBackground';
-import IntroScreen from './components/IntroScreen';
-import BirthdayReveal from './components/BirthdayReveal';
 import MessageSection from './components/MessageSection';
 import MemoryGallery from './components/MemoryGallery';
 import LoveReasons from './components/LoveReasons';
@@ -14,31 +12,20 @@ import FloatingNavigation from './components/FloatingNavigation';
 import './App.css';
 
 function App() {
-  const [stage, setStage] = useState('intro'); // intro, reveal, main, final
+  const [showFinal, setShowFinal] = React.useState(false);
 
   useEffect(() => {
     // Add smooth scrolling style
     document.documentElement.style.scrollBehavior = 'smooth';
   }, []);
 
-  const handleOpenSurprise = () => {
-    setStage('reveal');
-  };
-
-  const handleContinue = () => {
-    setStage('main');
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 100);
-  };
-
   const handleCompleteWish = () => {
-    setStage('final');
+    setShowFinal(true);
   };
 
   const handleReplay = () => {
     window.scrollTo(0, 0);
-    setStage('intro');
+    setShowFinal(false);
   };
 
   return (
@@ -46,40 +33,39 @@ function App() {
       <ParticleBackground />
       <MusicToggle musicUrl={birthdayConfig.music} />
 
-      <AnimatePresence mode="wait">
-        {stage === 'intro' && (
-          <motion.div key="intro" exit={{ opacity: 0, filter: 'blur(10px)', scale: 1.05 }} transition={{ duration: 1.5 }}>
-            <IntroScreen onOpen={handleOpenSurprise} birthDate={birthdayConfig.birthDate} />
-          </motion.div>
-        )}
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
+        <div id="home" className="pt-20">
+          <FloatingNavigation />
+          
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9, y: 50 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1.5, type: "spring", bounce: 0.4 }}
+            className="text-center z-10 p-12 md:p-20 rounded-3xl bg-white/5 backdrop-blur-2xl border border-white/10 shadow-[0_0_50px_rgba(255,255,255,0.05)] max-w-4xl mx-auto w-full relative overflow-hidden mt-10 mb-20"
+          >
+            <div className="absolute -top-32 -left-32 w-64 h-64 bg-pink-500/20 rounded-full blur-[80px]" />
+            <div className="absolute -bottom-32 -right-32 w-64 h-64 bg-purple-500/20 rounded-full blur-[80px]" />
 
-        {stage === 'reveal' && (
-          <motion.div key="reveal" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, scale: 1.1 }} transition={{ duration: 1.5 }}>
-            <BirthdayReveal onContinue={handleContinue} />
+            <h1 className="text-5xl md:text-7xl font-serif text-white mb-6 leading-tight relative z-10">
+              Happy Birthday,<br/> <span className="bg-gradient-to-r from-pink-400 to-rose-300 text-transparent bg-clip-text text-6xl md:text-8xl mt-6 inline-block font-bold">Mom ❤️</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-300 font-sans tracking-wide mb-16 font-light relative z-10">
+              Today is all about you. Est. {birthdayConfig.birthDate}
+            </p>
           </motion.div>
-        )}
 
-        {stage === 'main' && (
-          <motion.div key="main" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
-            <div id="home" className="pt-20">
-              <FloatingNavigation />
-              <BirthdayReveal onContinue={() => {
-                document.getElementById('message').scrollIntoView({ behavior: 'smooth' });
-              }} />
-              <MessageSection message={birthdayConfig.personalMessage} />
-              <MemoryGallery photos={birthdayConfig.photos} />
-              <LoveReasons reasons={birthdayConfig.reasons} />
-              <WishSection finalMessage={birthdayConfig.finalMessage} onComplete={handleCompleteWish} />
-            </div>
-          </motion.div>
-        )}
+          <MessageSection message={birthdayConfig.personalMessage} />
+          <MemoryGallery photos={birthdayConfig.photos} />
+          <LoveReasons reasons={birthdayConfig.reasons} />
+          <WishSection finalMessage={birthdayConfig.finalMessage} onComplete={handleCompleteWish} />
+        </div>
+      </motion.div>
 
-        {stage === 'final' && (
-          <motion.div key="final" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }}>
-            <FinalCelebration onReplay={handleReplay} />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {showFinal && (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }}>
+          <FinalCelebration onReplay={handleReplay} />
+        </motion.div>
+      )}
     </div>
   );
 }
