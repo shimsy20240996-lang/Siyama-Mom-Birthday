@@ -47,23 +47,32 @@ const WelcomeScreen = ({ onEnter }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 1.5 }}
         >
-          A Special Message
+          Hameed Family
         </motion.p>
         
         <motion.h1 
-          className="text-4xl md:text-6xl font-serif text-[#6C4C4A] mb-8 leading-tight drop-shadow-sm"
+          className="text-4xl md:text-5xl font-serif text-[#6C4C4A] mb-8 leading-tight drop-shadow-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 2 }}
         >
-          Wishing you the happiest of birthdays, Siyama. <br/>
-          <span className="text-2xl md:text-4xl text-[#AD7466] font-light mt-4 inline-block">We love you so much! ❤️</span>
+          A little celebration, made with love... <br/>
+          <span className="text-5xl md:text-7xl text-[#AD7466] font-bold mt-6 inline-block">For Siyama ❤️</span>
         </motion.h1>
+
+        <motion.p 
+          className="text-xl md:text-2xl text-[#8E706B] font-serif italic mb-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.5, duration: 2 }}
+        >
+          The heart of our family.
+        </motion.p>
         
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 3, duration: 1.5 }}
+          transition={{ delay: 4, duration: 1.5 }}
           className="mt-12"
         >
           <button 
@@ -71,7 +80,7 @@ const WelcomeScreen = ({ onEnter }) => {
             disabled={isExploding}
             className="btn-primary flex items-center justify-center mx-auto gap-3 group px-10 py-4 shadow-lg hover:shadow-xl transition-all duration-300 rounded-full"
           >
-            Happy Birthday 
+            Enter 
             <span className="text-xl group-hover:translate-x-2 transition-transform duration-300">✨</span>
           </button>
         </motion.div>

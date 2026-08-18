@@ -1,18 +1,21 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { birthdayConfig } from './config';
+import { hameedFamilyConfig } from './config';
 import ParticleBackground from './components/ParticleBackground';
 import WelcomeScreen from './components/WelcomeScreen';
 import MessageSection from './components/MessageSection';
+import FamilyMessages from './components/FamilyMessages';
 import MemoryGallery from './components/MemoryGallery';
-import LoveReasons from './components/LoveReasons';
+import FamilyTimeline from './components/FamilyTimeline';
+import YouAreSection from './components/YouAreSection';
+import FamilyTree from './components/FamilyTree';
 import WishSection from './components/WishSection';
 import FinalCelebration from './components/FinalCelebration';
 import MusicToggle from './components/MusicToggle';
 import './App.css';
 
 // Global audio instance so we can play it synchronously
-const globalAudio = new Audio(birthdayConfig.music);
+const globalAudio = new Audio(hameedFamilyConfig.music);
 globalAudio.loop = true;
 
 function App() {
@@ -21,10 +24,7 @@ function App() {
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
 
   useEffect(() => {
-    // Add smooth scrolling style
     document.documentElement.style.scrollBehavior = 'smooth';
-    
-    // Clean up
     return () => {
       globalAudio.pause();
     };
@@ -46,7 +46,6 @@ function App() {
   const handleEnter = () => {
     setHasEntered(true);
     setIsMusicPlaying(true); 
-    // START MUSIC SYNCHRONOUSLY ON CLICK
     globalAudio.play().catch(e => console.error("Audio play blocked:", e));
   };
 
@@ -76,17 +75,17 @@ function App() {
       </AnimatePresence>
 
       <AnimatePresence>
-        {hasEntered && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5, delay: 0.5 }}>
+        {hasEntered && !showFinal && (
+          <motion.div key="main-content" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, filter: 'blur(10px)' }} transition={{ duration: 1.5, delay: 0.5 }}>
             <div id="home" className="pt-10">
               
               <motion.div 
                 initial={{ opacity: 0, scale: 0.9, y: 50 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: 1.5, type: "spring", bounce: 0.4 }}
-                className="text-center z-10 p-12 md:p-20 rounded-3xl bg-white/40 backdrop-blur-md border border-white/60 shadow-[0_20px_50px_rgba(108,76,74,0.1)] max-w-4xl mx-auto w-full relative overflow-hidden mt-10 mb-20"
+                className="text-center z-10 p-12 md:p-20 rounded-3xl bg-[#FFF9F5]/90 backdrop-blur-md border border-[#E5C1B8] shadow-2xl max-w-4xl mx-auto w-full relative overflow-hidden mt-10 mb-20"
+                style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/cream-paper.png")' }}
               >
-                {/* Soft decorative blur orbs */}
                 <div className="absolute -top-32 -left-32 w-64 h-64 bg-[#E3B7AD]/40 rounded-full blur-[80px]" />
                 <div className="absolute -bottom-32 -right-32 w-64 h-64 bg-[#F4D9D0]/40 rounded-full blur-[80px]" />
 
@@ -94,24 +93,30 @@ function App() {
                   Happy Birthday,<br/> <span className="text-[#AD7466] text-6xl md:text-8xl mt-6 inline-block font-bold">Siyama ❤️</span>
                 </h1>
                 <p className="text-xl md:text-2xl text-[#8E706B] font-sans tracking-wide mb-16 font-light relative z-10">
-                  Today is all about you. Est. {birthdayConfig.birthDate}
+                  Today is all about you. Est. {hameedFamilyConfig.birthDate}
                 </p>
               </motion.div>
 
-              <MessageSection message={birthdayConfig.personalMessage} />
-              <MemoryGallery photos={birthdayConfig.photos} />
-              <LoveReasons reasons={birthdayConfig.reasons} />
-              <WishSection finalMessage={birthdayConfig.finalMessage} onComplete={handleCompleteWish} />
+              <MessageSection message={hameedFamilyConfig.familyLetter} />
+              <FamilyMessages messages={hameedFamilyConfig.familyMessages} />
+              <MemoryGallery photos={hameedFamilyConfig.photos} />
+              <FamilyTimeline timeline={hameedFamilyConfig.timeline} />
+              <YouAreSection words={hameedFamilyConfig.youAre} />
+              <FamilyTree members={hameedFamilyConfig.familyMembers} />
+              
+              <WishSection finalMessage={hameedFamilyConfig.finalMessage} onComplete={handleCompleteWish} />
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {showFinal && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }}>
-          <FinalCelebration onReplay={handleReplay} />
-        </motion.div>
-      )}
+      <AnimatePresence>
+        {showFinal && (
+          <motion.div key="final" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }}>
+            <FinalCelebration onReplay={handleReplay} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

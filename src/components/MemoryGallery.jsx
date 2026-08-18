@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
 const MemoryGallery = ({ photos }) => {
   const [selectedPhoto, setSelectedPhoto] = useState(null);
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setSelectedPhoto(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <section id="memories" className="section-container relative z-10 py-32">
       <div className="max-w-7xl mx-auto px-4 w-full">
         <h2 className="text-5xl md:text-6xl font-serif text-center mb-20 text-[#6C4C4A] drop-shadow-sm">
-          A Lifetime of Memories
+          Our Family Memories
         </h2>
         
         <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-12 pb-20">
@@ -26,6 +34,7 @@ const MemoryGallery = ({ photos }) => {
                 boxShadow: "0 25px 50px -12px rgba(108, 76, 74, 0.2)" 
               }}
               className="break-inside-avoid bg-[#FFF9F5] p-4 pb-16 rounded-sm border border-[#E5C1B8] shadow-md cursor-pointer relative group mx-2 mt-4"
+              style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/cream-paper.png")' }}
               onClick={() => setSelectedPhoto(photo)}
             >
               {/* Fake Tape */}
