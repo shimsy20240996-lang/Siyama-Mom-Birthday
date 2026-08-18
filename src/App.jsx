@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { birthdayConfig } from './config';
 import ParticleBackground from './components/ParticleBackground';
+import WelcomeScreen from './components/WelcomeScreen';
 import MessageSection from './components/MessageSection';
 import MemoryGallery from './components/MemoryGallery';
 import LoveReasons from './components/LoveReasons';
@@ -11,7 +12,8 @@ import MusicToggle from './components/MusicToggle';
 import './App.css';
 
 function App() {
-  const [showFinal, setShowFinal] = React.useState(false);
+  const [showFinal, setShowFinal] = useState(false);
+  const [hasEntered, setHasEntered] = useState(false);
 
   useEffect(() => {
     // Add smooth scrolling style
@@ -25,6 +27,7 @@ function App() {
   const handleReplay = () => {
     window.scrollTo(0, 0);
     setShowFinal(false);
+    setHasEntered(false);
   };
 
   return (
@@ -32,10 +35,20 @@ function App() {
       <ParticleBackground />
       <MusicToggle musicUrl={birthdayConfig.music} />
 
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
-        <div id="home" className="pt-10">
-          
-          <motion.div 
+      <AnimatePresence mode="wait">
+        {!hasEntered && (
+          <motion.div key="welcome" exit={{ opacity: 0, scale: 1.1, filter: 'blur(10px)' }} transition={{ duration: 1.5 }}>
+            <WelcomeScreen onEnter={() => setHasEntered(true)} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {hasEntered && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5, delay: 0.5 }}>
+            <div id="home" className="pt-10">
+              
+              <motion.div 
             initial={{ opacity: 0, scale: 0.9, y: 50 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1.5, type: "spring", bounce: 0.4 }}
@@ -58,6 +71,8 @@ function App() {
           <WishSection finalMessage={birthdayConfig.finalMessage} onComplete={handleCompleteWish} />
         </div>
       </motion.div>
+      )}
+      </AnimatePresence>
 
       {showFinal && (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }}>
