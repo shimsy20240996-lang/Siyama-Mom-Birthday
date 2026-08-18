@@ -14,6 +14,7 @@ import './App.css';
 function App() {
   const [showFinal, setShowFinal] = useState(false);
   const [hasEntered, setHasEntered] = useState(false);
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
 
   useEffect(() => {
     // Add smooth scrolling style
@@ -28,17 +29,27 @@ function App() {
     window.scrollTo(0, 0);
     setShowFinal(false);
     setHasEntered(false);
+    setIsMusicPlaying(false);
+  };
+
+  const handleEnter = () => {
+    setHasEntered(true);
+    setIsMusicPlaying(true); // Start music when they click Happy Birthday
   };
 
   return (
     <div className="app-container">
       <ParticleBackground />
-      <MusicToggle musicUrl={birthdayConfig.music} />
+      <MusicToggle 
+        musicUrl={birthdayConfig.music} 
+        isPlaying={isMusicPlaying}
+        onToggle={() => setIsMusicPlaying(!isMusicPlaying)}
+      />
 
       <AnimatePresence mode="wait">
         {!hasEntered && (
           <motion.div key="welcome" exit={{ opacity: 0, scale: 1.1, filter: 'blur(10px)' }} transition={{ duration: 1.5 }}>
-            <WelcomeScreen onEnter={() => setHasEntered(true)} />
+            <WelcomeScreen onEnter={handleEnter} />
           </motion.div>
         )}
       </AnimatePresence>
