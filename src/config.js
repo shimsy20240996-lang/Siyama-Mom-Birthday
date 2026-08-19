@@ -1,6 +1,8 @@
 const memoryModules = import.meta.glob('./assets/memories/*.{jpg,JPG,jpeg,png}', { eager: true });
 const memoryPhotos = Object.values(memoryModules).map(module => module.default);
 
+import vappaAvatar from './assets/vappa-avatar.jpg';
+
 export const hameedFamilyConfig = {
   familyName: "Hameed Family",
   birthdayPerson: "Siyama",
@@ -52,7 +54,7 @@ With all our love,
   ],
 
   familyVoiceWishes: [
-    { name: "Vappa", relationship: "Wife", wish: "Happy birthday, my dear wife. May Allah bless you with many more beautiful years.", voice: "male-warm" },
+    { name: "Vappa", relationship: "Wife", wish: "Happy birthday, my dear wife. May Allah bless you with many more beautiful years.", voice: "male-warm", photo: vappaAvatar },
     { name: "Peryappa", relationship: "Maini", wish: "Happy birthday, my dear Maini.", voice: "male-deep" },
     { name: "Peryamma", relationship: "Thankachi", wish: "Happy birthday, my dear Thankachi.", voice: "female-warm" },
     { name: "Hilmy Mama", relationship: "Thaaththah", wish: "Happy birthday, my dear Thaaththah.", voice: "male-warm" },
