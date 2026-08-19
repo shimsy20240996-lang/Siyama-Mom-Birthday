@@ -144,10 +144,13 @@ function App() {
 
       <AnimatePresence>
         {showFinal && (
-          <motion.div key="final" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }} className="relative z-10 pointer-events-none">
-            <div className="pointer-events-auto">
-              <FinalCelebration onReplay={handleReplay} />
-            </div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            className="relative z-50 bg-[#FBF5F1]"
+          >
+            <FinalCelebration onReplay={handleReplay} wishes={hameedFamilyConfig.familyVoiceWishes} />
           </motion.div>
         )}
       </AnimatePresence>
