@@ -19,8 +19,7 @@ const MemoryGallery = ({ photos }) => {
         <h2 className="text-5xl md:text-6xl font-serif text-center mb-20 text-[#6C4C4A] drop-shadow-sm">
           Our Family Memories
         </h2>
-        
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-12 pb-20">
+                <div className="columns-1 md:columns-2 lg:columns-3 gap-8 pb-20">
           {photos.map((photo, index) => (
             <motion.div
               key={index}
@@ -33,24 +32,23 @@ const MemoryGallery = ({ photos }) => {
                 rotate: index % 2 === 0 ? 2 : -2,
                 boxShadow: "0 25px 50px -12px rgba(108, 76, 74, 0.2)" 
               }}
-              className="break-inside-avoid bg-[#FFF9F5] p-4 pb-16 rounded-sm border border-[#E5C1B8] shadow-md cursor-pointer relative group mx-2 mt-4"
+              className="inline-block w-full bg-[#FFF9F5] p-4 pb-16 rounded-sm border border-[#E5C1B8] shadow-md cursor-pointer relative group mb-12"
               style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/cream-paper.png")' }}
               onClick={() => setSelectedPhoto(photo)}
             >
               {/* Fake Tape */}
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-8 bg-[#E3B7AD]/60 rotate-2 backdrop-blur-sm shadow-sm z-20" />
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-8 bg-[#E3B7AD]/80 rotate-2 backdrop-blur-sm shadow-sm z-20" />
 
-              <div className="overflow-hidden bg-[#F2DCD4] relative z-10 aspect-square w-full">
+              <div className="overflow-hidden bg-[#F2DCD4] relative z-10 min-h-[250px] flex items-center justify-center">
                 <img 
                   src={photo.url} 
                   alt={photo.caption} 
-                  className="w-full h-full object-cover transition-opacity duration-500"
+                  className="w-full h-auto object-contain transition-opacity duration-500"
                   loading="lazy"
                   onError={(e) => {
-                    // Fallback if image fails to load
+                    // Fallback if image fails to load (timeout)
                     e.target.style.display = 'none';
-                    e.target.parentElement.classList.add('flex', 'items-center', 'justify-center');
-                    e.target.parentElement.innerHTML = '<span class="text-[#AD7466] font-serif">Memory loading...</span>';
+                    e.target.parentElement.innerHTML = '<span class="text-[#AD7466] font-serif px-4 text-center">Memory loading...</span>';
                   }}
                 />
               </div>
