@@ -38,18 +38,24 @@ const MemoryGallery = ({ photos }) => {
               onClick={() => setSelectedPhoto(photo)}
             >
               {/* Fake Tape */}
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-8 bg-[#E3B7AD]/60 rotate-2 backdrop-blur-sm shadow-sm" />
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-8 bg-[#E3B7AD]/60 rotate-2 backdrop-blur-sm shadow-sm z-20" />
 
-              <div className="overflow-hidden bg-[#F2DCD4] relative z-10">
+              <div className="overflow-hidden bg-[#F2DCD4] relative z-10 aspect-square w-full">
                 <img 
                   src={photo.url} 
                   alt={photo.caption} 
-                  className="w-full h-auto object-cover"
+                  className="w-full h-full object-cover transition-opacity duration-500"
                   loading="lazy"
+                  onError={(e) => {
+                    // Fallback if image fails to load
+                    e.target.style.display = 'none';
+                    e.target.parentElement.classList.add('flex', 'items-center', 'justify-center');
+                    e.target.parentElement.innerHTML = '<span class="text-[#AD7466] font-serif">Memory loading...</span>';
+                  }}
                 />
               </div>
-              <div className="absolute bottom-6 left-0 w-full text-center px-6 z-10">
-                <p className="font-serif text-[#8E706B] text-lg md:text-xl font-medium tracking-wide">
+              <div className="absolute bottom-4 left-0 w-full text-center px-6 z-10 h-12 flex items-center justify-center">
+                <p className="font-serif text-[#8E706B] text-sm md:text-base font-medium tracking-wide line-clamp-2 leading-tight">
                   {photo.caption}
                 </p>
               </div>
