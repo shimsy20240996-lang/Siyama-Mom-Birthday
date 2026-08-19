@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 
@@ -7,70 +7,31 @@ const Cake = ({ stage }) => {
   const isCut = stage >= 7;
 
   return (
-    <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto mt-12 mb-16">
+    <div className="relative flex flex-col items-center justify-end w-[320px] h-[340px] mx-auto mt-4 mb-12">
       {/* Knife Animation */}
       <AnimatePresence>
         {stage === 7 && (
           <motion.div
-            initial={{ x: 100, y: -100, opacity: 0, rotate: 45 }}
-            animate={{ x: 0, y: -20, opacity: 1, rotate: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1, ease: "easeInOut" }}
-            className="absolute top-0 right-10 z-30 drop-shadow-lg"
+            initial={{ x: 120, y: -150, opacity: 0, rotate: 30 }}
+            animate={{ x: 20, y: -50, opacity: 1, rotate: 0 }}
+            exit={{ opacity: 0, transition: { duration: 0.5 } }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="absolute top-[10%] right-[10%] z-40 drop-shadow-2xl"
           >
-            <svg width="60" height="120" viewBox="0 0 60 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M25 0 C25 0 20 40 20 80 C20 85 25 90 30 90 C35 90 40 85 40 80 C40 40 35 0 35 0 Z" fill="#F4D9D0"/>
-              <path d="M28 85 L32 85 L32 115 L28 115 Z" fill="#AD7466"/>
-              <circle cx="30" cy="115" r="5" fill="#AD7466"/>
+            <svg width="50" height="160" viewBox="0 0 40 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 0 C15 0 10 70 15 100 C15 105 20 110 20 110 C20 110 25 105 25 100 C30 70 25 0 25 0 Z" fill="#F4D9D0"/>
+              <path d="M18 105 L22 105 L22 140 L18 140 Z" fill="#AD7466"/>
+              <circle cx="20" cy="140" r="5" fill="#AD7466"/>
             </svg>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Cake Stand */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-48 md:w-60 h-8 bg-[#8E706B] rounded-[50%] z-0 drop-shadow-md"></div>
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-32 md:w-40 h-6 bg-[#6C4C4A] rounded-b-xl z-0"></div>
-
-      {/* Cake Base */}
+      {/* Candles Wrapper */}
       <motion.div 
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 w-44 md:w-56 h-24 md:h-32 bg-[#FDF6F3] rounded-3xl z-10 border-b-4 border-[#E5C1B8] shadow-inner"
-        animate={isCut ? { x: "-55%" } : { x: "-50%" }}
+        className="flex gap-5 z-30 mb-[-2px] relative"
+        animate={{ x: isCut ? -20 : 0, opacity: isCut ? 0 : 1 }}
         transition={{ duration: 1.5, ease: "easeInOut" }}
-      >
-        <div className="absolute top-1/2 left-0 w-full h-2 bg-[#F4D9D0] opacity-60"></div>
-      </motion.div>
-
-      {/* Cut Slice (Only visible when cut) */}
-      <motion.div 
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 w-44 md:w-56 h-24 md:h-32 bg-[#FDF6F3] rounded-3xl z-10 border-b-4 border-[#E5C1B8] shadow-inner"
-        initial={{ opacity: 0, clipPath: "polygon(50% 0, 100% 0, 100% 100%, 50% 100%)" }}
-        animate={isCut ? { opacity: 1, x: "-40%", y: 10, rotate: 2 } : { opacity: 0 }}
-        transition={{ duration: 1.5, ease: "easeInOut" }}
-      >
-        <div className="absolute top-1/2 left-0 w-full h-2 bg-[#F4D9D0] opacity-60"></div>
-        <div className="absolute left-0 top-0 w-1/2 h-full bg-[#E3B7AD] opacity-30 border-r border-[#AD7466]"></div>
-      </motion.div>
-
-      {/* Icing/Frosting Drips */}
-      <motion.div 
-        className="absolute bottom-28 md:bottom-[8.5rem] left-1/2 -translate-x-1/2 w-48 md:w-60 z-20"
-        animate={isCut ? { x: "-55%" } : { x: "-50%" }}
-        transition={{ duration: 1.5, ease: "easeInOut" }}
-      >
-        <svg viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 10 Q 10 30 20 10 T 40 10 T 60 10 T 80 10 T 100 10 T 120 10 T 140 10 T 160 10 T 180 10 T 200 10 L 200 0 L 0 0 Z" fill="#E3B7AD"/>
-          <path d="M10 10 Q 20 40 30 10" fill="#E3B7AD"/>
-          <path d="M50 10 Q 60 35 70 10" fill="#E3B7AD"/>
-          <path d="M110 10 Q 120 45 130 10" fill="#E3B7AD"/>
-          <path d="M160 10 Q 170 30 180 10" fill="#E3B7AD"/>
-        </svg>
-      </motion.div>
-
-      {/* Candles */}
-      <motion.div 
-        className="absolute bottom-32 md:bottom-40 left-1/2 -translate-x-1/2 flex gap-3 md:gap-4 z-20"
-        animate={isCut ? { x: "-55%", opacity: 0 } : { x: "-50%", opacity: 1 }}
-        transition={{ duration: 1 }}
       >
         {[...Array(5)].map((_, i) => (
           <div key={i} className="relative flex flex-col items-center">
@@ -79,54 +40,91 @@ const Cake = ({ stage }) => {
               {isLit && (
                 <motion.div
                   initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: [1, 1.2, 1], rotate: [0, -5, 5, 0] }}
+                  animate={{ opacity: 1, scale: [1, 1.2, 1], rotate: [0, -3, 3, 0] }}
                   exit={{ opacity: 0, scale: 0, y: -10 }}
-                  transition={{ 
-                    opacity: { duration: 0.3 }, 
-                    scale: { duration: 0.1, delay: i * 0.2 },
-                    rotate: { repeat: Infinity, duration: 1.5, ease: "easeInOut" }
-                  }}
-                  className="w-3 h-4 bg-gradient-to-t from-[#D4AF37] to-[#FFF9F5] rounded-[50%] mb-1 shadow-[0_0_10px_#D4AF37]"
+                  transition={{ opacity: { duration: 0.3 }, scale: { duration: 0.2, delay: i * 0.1 }, rotate: { repeat: Infinity, duration: 1.5 } }}
+                  className="w-[14px] h-[22px] bg-gradient-to-t from-[#D4AF37] to-[#FFF9F5] rounded-[50%] mb-1 shadow-[0_0_12px_#D4AF37]"
                 />
               )}
             </AnimatePresence>
             
-            {/* Smoke (after blowing) */}
+            {/* Smoke */}
             <AnimatePresence>
               {stage === 5 && (
                 <motion.div
                   initial={{ opacity: 0, y: 0 }}
-                  animate={{ opacity: 0.5, y: -20, scale: 2 }}
+                  animate={{ opacity: 0.4, y: -40, scale: 2.5 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 2, ease: "easeOut" }}
-                  className="absolute -top-4 w-2 h-2 bg-gray-300 rounded-full blur-[2px]"
+                  className="absolute -top-4 w-4 h-4 bg-gray-300 rounded-full blur-[4px]"
                 />
               )}
             </AnimatePresence>
 
             {/* Candle Body */}
-            <div className="w-2 h-8 bg-[#FFF9F5] border border-[#E5C1B8] rounded-t-sm relative overflow-hidden">
-              <div className="absolute top-2 w-full h-1 bg-[#AD7466] rotate-12"></div>
-              <div className="absolute top-5 w-full h-1 bg-[#AD7466] rotate-12"></div>
+            <div className="w-[12px] h-[40px] bg-gradient-to-b from-[#FFF9F5] to-[#F4D9D0] border border-[#E5C1B8] rounded-t-sm relative overflow-hidden shadow-sm">
+               <div className="absolute top-2 w-full h-[2px] bg-[#AD7466] rotate-12"></div>
+               <div className="absolute top-6 w-full h-[2px] bg-[#AD7466] rotate-12"></div>
             </div>
           </div>
         ))}
       </motion.div>
+
+      {/* CAKE BODY (Splits into 2 flex items) */}
+      <div className="flex items-end z-20 relative drop-shadow-xl">
+        {/* Main Cake (Left) */}
+        <motion.div 
+          className="w-[180px] h-[140px] bg-[#FDF6F3] rounded-tl-2xl rounded-bl-sm border-2 border-[#E5C1B8] border-r-0 relative overflow-hidden"
+          animate={{ x: isCut ? -30 : 0 }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+        >
+          {/* Frosting Top */}
+          <div className="absolute top-0 w-full h-[40px] bg-[#E3B7AD]">
+            {/* Drips */}
+            <svg className="absolute top-[39px] left-0 w-full h-[15px]" preserveAspectRatio="none" viewBox="0 0 100 20" fill="#E3B7AD">
+              <path d="M0 0 Q 10 20 20 0 Q 30 15 40 0 Q 50 20 60 0 Q 70 15 80 0 Q 90 20 100 0 L 100 -10 L 0 -10 Z" />
+            </svg>
+          </div>
+          {/* Cake Layers/Filling */}
+          <div className="absolute top-[75px] w-full h-[14px] bg-[#F4D9D0]"></div>
+          <div className="absolute top-[110px] w-full h-[14px] bg-[#F4D9D0]"></div>
+        </motion.div>
+
+        {/* Slice (Right) */}
+        <motion.div 
+          className="w-[90px] h-[140px] bg-[#FDF6F3] rounded-tr-2xl rounded-br-sm border-2 border-[#E5C1B8] border-l-0 relative overflow-hidden origin-bottom-left"
+          animate={{ x: isCut ? 30 : 0, y: isCut ? 15 : 0, rotate: isCut ? 5 : 0 }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+        >
+          {/* Frosting Top */}
+          <div className="absolute top-0 w-full h-[40px] bg-[#E3B7AD]">
+            {/* Drips */}
+            <svg className="absolute top-[39px] left-0 w-full h-[15px]" preserveAspectRatio="none" viewBox="0 0 100 20" fill="#E3B7AD">
+              <path d="M0 0 Q 20 20 40 0 Q 60 15 80 0 Q 90 20 100 0 L 100 -10 L 0 -10 Z" />
+            </svg>
+          </div>
+          {/* Cake Layers/Filling */}
+          <div className="absolute top-[75px] w-full h-[14px] bg-[#F4D9D0]"></div>
+          <div className="absolute top-[110px] w-full h-[14px] bg-[#F4D9D0]"></div>
+          
+          {/* Inner Cut Shadow (Visible on the slice edge) */}
+          <div className="absolute left-0 top-0 w-[5px] h-full bg-[#E5C1B8] opacity-50 shadow-inner"></div>
+        </motion.div>
+      </div>
+
+      {/* Cake Plate/Stand */}
+      <div className="z-10 relative flex flex-col items-center mt-[-4px]">
+        <div className="w-[330px] h-[30px] bg-[#8E706B] rounded-[50%] shadow-lg border-b-[6px] border-[#6C4C4A]"></div>
+        <div className="w-[150px] h-[45px] bg-[#6C4C4A] rounded-b-3xl shadow-xl mt-[-15px]"></div>
+        <div className="w-[190px] h-[20px] bg-[#5a3f3e] rounded-[50%] mt-[-10px] opacity-90 shadow-[0_10px_20px_rgba(0,0,0,0.1)]"></div>
+      </div>
     </div>
   );
 };
 
-export default function FinalCelebration({ onReplay, wishes = [] }) {
+export default function FinalCelebration({ onReplay }) {
   const [stage, setStage] = useState(0);
-  const [avatars, setAvatars] = useState([]);
   const isDarkened = stage >= 4 && stage <= 5;
-
-  useEffect(() => {
-    // Pick ~8 random avatars from wishes
-    const membersWithPhotos = wishes.filter(w => w.name && w.name !== 'Rasmiya');
-    const shuffled = [...membersWithPhotos].sort(() => 0.5 - Math.random());
-    setAvatars(shuffled.slice(0, 8));
-  }, [wishes]);
 
   const triggerConfetti = () => {
     const duration = 5 * 1000;
@@ -147,37 +145,26 @@ export default function FinalCelebration({ onReplay, wishes = [] }) {
 
   // Progression handlers
   const handleStageNext = () => {
-    if (stage === 0) setStage(1); // To unlit
+    if (stage === 0) setStage(1); 
     else if (stage === 1) {
-      setStage(2); // Light candles
-      setTimeout(() => setStage(3), 2000); // Wait for lit
+      setStage(2); 
+      setTimeout(() => setStage(3), 2000); 
     }
     else if (stage === 3) {
-      setStage(4); // Make a wish (dark)
-      setTimeout(() => setStage(5), 4000); // Wait 4s, go to Blow
+      setStage(4); 
+      setTimeout(() => setStage(5), 4000); 
     }
     else if (stage === 5) {
-      setStage(6); // Smoke out
-      setTimeout(() => setStage(7), 2000); // Ready to cut
+      setStage(6); 
+      setTimeout(() => setStage(7), 2000); 
     }
     else if (stage === 7) {
-      setStage(8); // Cutting
+      setStage(8); 
       setTimeout(() => {
-        setStage(9); // Celebration
+        setStage(9); 
         triggerConfetti();
       }, 1500);
     }
-  };
-
-  // Positions for 8 avatars around the cake
-  const getAvatarStyle = (index) => {
-    const radius = window.innerWidth < 768 ? 130 : 220;
-    const angle = (index / 8) * (2 * Math.PI) - (Math.PI / 2);
-    const x = Math.cos(angle) * radius;
-    // Compress Y axis slightly to make an oval around the cake
-    const y = Math.sin(angle) * (radius * 0.7);
-    
-    return { x, y };
   };
 
   return (
@@ -236,46 +223,8 @@ export default function FinalCelebration({ onReplay, wishes = [] }) {
 
       {/* Main Center Area */}
       <div className="relative z-30 flex flex-col items-center justify-center w-full max-w-4xl min-h-[400px]">
-        
-        {/* Avatars */}
-        {stage >= 1 && avatars.map((avatar, i) => {
-          const { x, y } = getAvatarStyle(i);
-          const isCelebrating = stage >= 9;
-          
-          return (
-            <motion.div
-              key={avatar.name}
-              initial={{ opacity: 0, scale: 0, x: 0, y: 0 }}
-              animate={{ 
-                opacity: 1, 
-                scale: isCelebrating ? 1.1 : 1,
-                x, 
-                y,
-                rotate: isCelebrating ? (i % 2 === 0 ? 5 : -5) : 0
-              }}
-              transition={{ 
-                opacity: { duration: 1, delay: i * 0.1 },
-                x: { duration: 1, type: "spring" },
-                y: { duration: 1, type: "spring" },
-                scale: { duration: 0.5 },
-                rotate: { duration: 0.5, yoyo: Infinity }
-              }}
-              className="absolute top-1/2 left-1/2 -mt-6 -ml-6 md:-mt-8 md:-ml-8 flex flex-col items-center"
-            >
-              <div className={`w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-[#E5C1B8] flex items-center justify-center shadow-lg transition-all duration-1000 ${isDarkened ? 'opacity-50' : 'opacity-100'} ${isCelebrating ? 'shadow-[#D4AF37]/40 ring-4 ring-[#F4D9D0]' : 'bg-[#FFF9F5]'}`}>
-                {avatar.photo ? (
-                  <img src={avatar.photo} alt={avatar.name} className="w-full h-full object-cover rounded-full p-0.5" />
-                ) : (
-                  <span className="font-serif text-[#6C4C4A] text-xl">{avatar.name.charAt(0)}</span>
-                )}
-              </div>
-            </motion.div>
-          );
-        })}
-
         {/* The Cake */}
         {stage >= 1 && <Cake stage={stage} />}
-
       </div>
 
       {/* Bottom Controls / Text */}
