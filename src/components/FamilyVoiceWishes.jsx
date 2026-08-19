@@ -20,7 +20,7 @@ const Waveform = () => (
   </div>
 );
 
-export default function FamilyVoiceWishes({ wishes }) {
+export default function FamilyVoiceWishes({ wishes, onVoiceStart, onVoiceEnd }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("All");
   const [playingId, setPlayingId] = useState(null);
@@ -55,9 +55,12 @@ export default function FamilyVoiceWishes({ wishes }) {
     };
   }, []);
 
-  const stopVoice = () => {
+  const stopVoice = (isSwitching = false) => {
     if (window.speechSynthesis) {
       window.speechSynthesis.cancel();
+    }
+    if (playingId && !isSwitching && onVoiceEnd) {
+      onVoiceEnd();
     }
     setPlayingId(null);
   };
@@ -65,24 +68,30 @@ export default function FamilyVoiceWishes({ wishes }) {
   const playVoice = (member) => {
     // If clicking the currently playing member, just stop it
     if (playingId === member.name) {
-      stopVoice();
+      stopVoice(false);
       return;
     }
     
-    stopVoice();
+    stopVoice(true);
 
     if (member.status === 'loading') return;
+
+    if (onVoiceStart) onVoiceStart();
 
     if (member.audioFile) {
       // Future-proofing: Play real audio file logic here
       console.log("Playing real audio file:", member.audioFile);
       setPlayingId(member.name);
       // Mock duration for real audio placeholder
-      setTimeout(() => setPlayingId(null), 3000); 
+      setTimeout(() => {
+        setPlayingId(null);
+        if (onVoiceEnd) onVoiceEnd();
+      }, 3000); 
     } else {
       // Fallback: AI Text-to-Speech via Web Speech API
       if (!window.speechSynthesis) {
         alert("Your browser does not support voice synthesis.");
+        if (onVoiceEnd) onVoiceEnd();
         return;
       }
       
@@ -117,9 +126,34 @@ export default function FamilyVoiceWishes({ wishes }) {
         }
       }
       
-      utterance.onstart = () => setPlayingId(member.name);
-      utterance.onend = () => setPlayingId(null);
-      utterance.onerror = () => setPlayingId(null);
+      utterance.onstart = () => {
+        setPlayingId(member.name);
+      };
+      
+      utterance.onend = () => {
+        // Only trigger end if we are still the active playing ID
+        // (If user clicked another, stopVoice(true) handles the reset without resuming music)
+        setPlayingId((current) => {
+          if (current === member.name) {
+            if (onVoiceEnd) onVoiceEnd();
+            return null;
+          }
+          return current;
+        });
+      };
+      
+      utterance.onerror = (e) => {
+        // Ignore "interrupted" errors which happen naturally on cancel()
+        if (e.error !== 'interrupted' && e.error !== 'canceled') {
+          setPlayingId((current) => {
+            if (current === member.name) {
+              if (onVoiceEnd) onVoiceEnd();
+              return null;
+            }
+            return current;
+          });
+        }
+      };
       
       window.speechSynthesis.speak(utterance);
     }

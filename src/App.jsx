@@ -59,6 +59,30 @@ function App() {
     setIsMusicPlaying(!isMusicPlaying);
   };
 
+  const wasMusicPlayingRef = useRef(false);
+  const isVoiceActiveRef = useRef(false);
+
+  const handleVoiceStart = () => {
+    if (!isVoiceActiveRef.current) {
+      wasMusicPlayingRef.current = isMusicPlaying;
+    }
+    isVoiceActiveRef.current = true;
+
+    if (isMusicPlaying) {
+      globalAudio.pause();
+      setIsMusicPlaying(false);
+    }
+  };
+
+  const handleVoiceEnd = () => {
+    isVoiceActiveRef.current = false;
+    if (wasMusicPlayingRef.current) {
+      globalAudio.play().catch(e => console.error("Audio play blocked:", e));
+      setIsMusicPlaying(true);
+      wasMusicPlayingRef.current = false;
+    }
+  };
+
   return (
     <div className="app-container relative">
       <ParticleBackground />
@@ -101,7 +125,11 @@ function App() {
 
                 <MessageSection message={hameedFamilyConfig.familyLetter} />
                 <FamilyMessages messages={hameedFamilyConfig.familyMessages} />
-                <FamilyVoiceWishes wishes={hameedFamilyConfig.familyVoiceWishes} />
+                <FamilyVoiceWishes 
+                  wishes={hameedFamilyConfig.familyVoiceWishes} 
+                  onVoiceStart={handleVoiceStart}
+                  onVoiceEnd={handleVoiceEnd}
+                />
                 <MemoryGallery photos={hameedFamilyConfig.photos} />
                 <FamilyTimeline timeline={hameedFamilyConfig.timeline} />
                 <YouAreSection words={hameedFamilyConfig.youAre} />
