@@ -59,6 +59,8 @@ With all our love,
   ],
 
   familyVoiceWishes: [
+    { name: "Appa", relationship: "Makal", wish: "Happy birthday, my dear Makal.", voice: "male-warm", photo: avatarPhotos['appa'] },
+    { name: "Ummamma", relationship: "Makal", wish: "Happy birthday, my dear Makal.", voice: "female-warm", photo: avatarPhotos['ummamma'] },
     { name: "Vappa", relationship: "Wife", wish: "Happy birthday, my dear wife. May Allah bless you with many more beautiful years.", voice: "male-warm", photo: avatarPhotos['vappa'] },
     { name: "Peryappa", relationship: "Maini", wish: "Happy birthday, my dear Maini.", voice: "male-deep", photo: avatarPhotos['peryappa'] },
     { name: "Peryamma", relationship: "Thankachi", wish: "Happy birthday, my dear Thankachi.", voice: "female-warm", photo: avatarPhotos['peryamma'] },
@@ -82,6 +84,7 @@ With all our love,
     { name: "Hudhaif", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "male-young", photo: avatarPhotos['hudu'] },
     { name: "Aysha", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "female-young", photo: avatarPhotos['aysha'] },
     { name: "Saadh", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "male-young", photo: avatarPhotos['saadh'] },
+    { name: "Agaridh", relationship: "Vappamma", wish: "Happy birthday, my dear Vappamma.", voice: "male-young", photo: avatarPhotos['agaridh'] },
     { name: "Rasmiya", relationship: "Mami", wish: "", voice: "female-young", status: "loading" }
   ],
 
