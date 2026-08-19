@@ -5,7 +5,7 @@ export const hameedFamilyConfig = {
   familyName: "Hameed Family",
   birthdayPerson: "Siyama",
   birthDate: "1971.08.20",
-  music: import.meta.env.BASE_URL + "happy-birthday.mp3",
+  music: import.meta.env.BASE_URL + "birthday-song.mp3",
   familyLetter: `Dear Siyama,
 
 Today, we celebrate more than just your birthday.
