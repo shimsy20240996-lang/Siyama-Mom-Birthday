@@ -15,46 +15,32 @@ export default function FloatingMemories() {
   const floatingPhotos = useMemo(() => {
     // Shuffle photos using a stable seed approach or just random once on mount
     const shuffled = [...hameedFamilyConfig.photos].sort(() => Math.random() - 0.5);
-    // Select 15 for desktop, 7 for mobile
-    const count = isMobile ? 7 : 15;
+    // Select 20 for desktop, 10 for mobile
+    const count = isMobile ? 10 : 20;
     const selected = shuffled.slice(0, count);
 
     return selected.map((photo, i) => {
-      // Width: 80px to 150px
-      const size = 80 + Math.random() * 70;
+      // Width: 80px to 160px
+      const size = 80 + Math.random() * 80;
       
-      // Depth parameters based on size
-      // Far: < 100 (blur 1.5px, opacity 0.25-0.3)
-      // Mid: 100-130 (blur 0.5px, opacity 0.3-0.35)
-      // Near: > 130 (blur 0px, opacity 0.35-0.45)
-      let depthBlur = 0;
-      let depthOpacity = 0.35;
-      if (size < 100) {
-        depthBlur = 1.5;
-        depthOpacity = 0.25 + Math.random() * 0.05;
-      } else if (size < 130) {
-        depthBlur = 0.5;
-        depthOpacity = 0.3 + Math.random() * 0.05;
-      } else {
-        depthBlur = 0;
-        depthOpacity = 0.35 + Math.random() * 0.1;
-      }
+      // No more transparency or heavy blur; just solid photos
+      const depthOpacity = 1;
+      const depthBlur = size < 100 ? 0.5 : 0; // barely any blur, just for tiny ones
 
-      // Avoid center width (25% to 75%). Let's bias to the left 0-25% and right 75-100%
-      const isLeft = Math.random() > 0.5;
-      const x = isLeft ? Math.random() * 25 : 75 + Math.random() * 20; // vw
+      // Place anywhere on the page (0 to 90vw)
+      const x = Math.random() * 90; // vw
       const y = Math.random() * 90; // vh
 
-      // Random rotation -6 to +5
-      const rot = -6 + Math.random() * 11;
+      // Random rotation -8 to +8
+      const rot = -8 + Math.random() * 17;
 
-      // Animation delta
-      const moveX = (Math.random() - 0.5) * 40; // subtle left/right drift
-      const moveY = (Math.random() - 0.5) * 60; // subtle up/down drift
-      const rotDelta = (Math.random() - 0.5) * 8; // gentle sway
+      // Increased animation delta to move all around the page
+      const moveX = (Math.random() - 0.5) * 150; // drift up to 75px left/right
+      const moveY = (Math.random() - 0.5) * 200; // drift up to 100px up/down
+      const rotDelta = (Math.random() - 0.5) * 15; // gentle sway
 
-      // Duration 15-35s
-      const duration = 15 + Math.random() * 20;
+      // Duration 20-40s (slow and dreamy)
+      const duration = 20 + Math.random() * 20;
 
       return {
         ...photo,
@@ -105,8 +91,8 @@ export default function FloatingMemories() {
               ease: "easeInOut"
             }}
             whileHover={{
-              scale: 1.05,
-              opacity: 0.85,
+              scale: 1.15,
+              opacity: 1,
               filter: 'blur(0px)',
               zIndex: 50,
               transition: { duration: 0.4, ease: "easeOut" }

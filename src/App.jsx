@@ -102,7 +102,6 @@ function App() {
 
                 <MessageSection message={hameedFamilyConfig.familyLetter} />
                 <FamilyMessages messages={hameedFamilyConfig.familyMessages} />
-                <MemoryGallery photos={hameedFamilyConfig.photos} />
                 <FamilyTimeline timeline={hameedFamilyConfig.timeline} />
                 <YouAreSection words={hameedFamilyConfig.youAre} />
                 <FamilyTree members={hameedFamilyConfig.familyMembers} />
