@@ -51,6 +51,33 @@ With all our love,
     { period: "Always", description: "Because family is forever." }
   ],
 
+  familyVoiceWishes: [
+    { name: "Vappa", relationship: "Wife", wish: "Happy birthday, my dear wife. May Allah bless you with many more beautiful years.", voice: "male-warm" },
+    { name: "Peryapp", relationship: "Maini", wish: "Happy birthday, my dear Maini.", voice: "male-deep" },
+    { name: "Peryamma", relationship: "Thankachi", wish: "Happy birthday, my dear Thankachi.", voice: "female-warm" },
+    { name: "Hilmy Mama", relationship: "Thatha", wish: "Happy birthday, my dear Thatha.", voice: "male-warm" },
+    { name: "Hismy Mama", relationship: "Thatha", wish: "Happy birthday, my dear Thatha.", voice: "male-warm" },
+    { name: "Rasmy Mama", relationship: "Thatha", wish: "Happy birthday, my dear Thatha.", voice: "male-warm" },
+    { name: "Rifaya Mami", relationship: "Maini", wish: "Happy birthday, my dear Maini.", voice: "female-warm" },
+    { name: "Rihanna Mami", relationship: "Maini", wish: "Happy birthday, my dear Maini.", voice: "female-warm" },
+    { name: "Rinosa Mami", relationship: "Maini", wish: "Happy birthday, my dear Maini.", voice: "female-warm" },
+    { name: "Sanath Bro", relationship: "Sachimma", wish: "Happy birthday, my dear Sachimma.", voice: "male-young" },
+    { name: "Atheeba Maini", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "female-young" },
+    { name: "Rees Bro", relationship: "Umma", wish: "Happy birthday, my dear Umma.", voice: "male-young" },
+    { name: "Nibal Maini", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "female-young" },
+    { name: "Has Bro", relationship: "Sachimma", wish: "Happy birthday, my dear Sachimma.", voice: "male-young" },
+    { name: "Shim Bro", relationship: "Umma", wish: "Happy birthday, my dear Umma.", voice: "male-young" },
+    { name: "Asky", relationship: "Sachimma", wish: "Happy birthday, my dear Sachimma.", voice: "male-young" },
+    { name: "Hefad", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "male-young" },
+    { name: "Hamdhan", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "male-young" },
+    { name: "Sara", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "female-young" },
+    { name: "Reesath", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "male-young" },
+    { name: "Hudhaif", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "male-young" },
+    { name: "Aysha", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "female-young" },
+    { name: "Saadh", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "male-young" },
+    { name: "Rasmiya", relationship: "Mami", wish: "", voice: "female-young", status: "loading" }
+  ],
+
   youAre: [
     "Our strength.",
     "Our comfort.",

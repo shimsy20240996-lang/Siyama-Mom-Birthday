@@ -12,6 +12,7 @@ import FamilyTree from './components/FamilyTree';
 import WishSection from './components/WishSection';
 import FinalCelebration from './components/FinalCelebration';
 import MusicToggle from './components/MusicToggle';
+import FamilyVoiceWishes from './components/FamilyVoiceWishes';
 import './App.css';
 
 // Global audio instance so we can play it synchronously
@@ -100,6 +101,7 @@ function App() {
 
                 <MessageSection message={hameedFamilyConfig.familyLetter} />
                 <FamilyMessages messages={hameedFamilyConfig.familyMessages} />
+                <FamilyVoiceWishes wishes={hameedFamilyConfig.familyVoiceWishes} />
                 <MemoryGallery photos={hameedFamilyConfig.photos} />
                 <FamilyTimeline timeline={hameedFamilyConfig.timeline} />
                 <YouAreSection words={hameedFamilyConfig.youAre} />
