@@ -12,7 +12,6 @@ import FamilyTree from './components/FamilyTree';
 import WishSection from './components/WishSection';
 import FinalCelebration from './components/FinalCelebration';
 import MusicToggle from './components/MusicToggle';
-import FloatingMemories from './components/FloatingMemories';
 import './App.css';
 
 // Global audio instance so we can play it synchronously
@@ -62,7 +61,6 @@ function App() {
   return (
     <div className="app-container relative">
       <ParticleBackground />
-      <FloatingMemories />
       
       <MusicToggle 
         isPlaying={isMusicPlaying}

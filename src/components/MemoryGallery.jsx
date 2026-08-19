@@ -19,7 +19,7 @@ const MemoryGallery = ({ photos }) => {
         <h2 className="text-5xl md:text-6xl font-serif text-center mb-20 text-[#6C4C4A] drop-shadow-sm">
           Our Family Memories
         </h2>
-                <div className="columns-1 md:columns-2 lg:columns-3 gap-8 pb-20">
+                <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 xl:columns-6 gap-4 md:gap-6 pb-20">
           {photos.map((photo, index) => (
             <motion.div
               key={index}
@@ -32,14 +32,14 @@ const MemoryGallery = ({ photos }) => {
                 rotate: index % 2 === 0 ? 2 : -2,
                 boxShadow: "0 25px 50px -12px rgba(108, 76, 74, 0.2)" 
               }}
-              className="inline-block w-full bg-[#FFF9F5] p-4 pb-16 rounded-sm border border-[#E5C1B8] shadow-md cursor-pointer relative group mb-12"
+              className="inline-block w-full bg-[#FFF9F5] p-2 pb-8 md:p-3 md:pb-10 rounded-sm border border-[#E5C1B8] shadow-md cursor-pointer relative group mb-6 md:mb-8"
               style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/cream-paper.png")' }}
               onClick={() => setSelectedPhoto(photo)}
             >
               {/* Fake Tape */}
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-8 bg-[#E3B7AD]/80 rotate-2 backdrop-blur-sm shadow-sm z-20" />
+              <div className="absolute -top-2 md:-top-3 left-1/2 -translate-x-1/2 w-12 h-4 md:w-16 md:h-6 bg-[#E3B7AD]/80 rotate-2 backdrop-blur-sm shadow-sm z-20" />
 
-              <div className="overflow-hidden bg-[#F2DCD4] relative z-10 min-h-[250px] flex items-center justify-center">
+              <div className="overflow-hidden bg-[#F2DCD4] relative z-10 min-h-[100px] md:min-h-[150px] flex items-center justify-center">
                 <img 
                   src={photo.url} 
                   alt={photo.caption} 
@@ -48,12 +48,12 @@ const MemoryGallery = ({ photos }) => {
                   onError={(e) => {
                     // Fallback if image fails to load (timeout)
                     e.target.style.display = 'none';
-                    e.target.parentElement.innerHTML = '<span class="text-[#AD7466] font-serif px-4 text-center">Memory loading...</span>';
+                    e.target.parentElement.innerHTML = '<span class="text-[#AD7466] font-serif text-[10px] px-2 text-center">Memory loading...</span>';
                   }}
                 />
               </div>
-              <div className="absolute bottom-4 left-0 w-full text-center px-6 z-10 h-12 flex items-center justify-center">
-                <p className="font-serif text-[#8E706B] text-sm md:text-base font-medium tracking-wide line-clamp-2 leading-tight">
+              <div className="absolute bottom-2 md:bottom-3 left-0 w-full text-center px-2 md:px-4 z-10 h-6 md:h-8 flex items-center justify-center">
+                <p className="font-serif text-[#8E706B] text-[9px] md:text-xs font-medium tracking-wide line-clamp-2 leading-tight">
                   {photo.caption}
                 </p>
               </div>
