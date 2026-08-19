@@ -88,11 +88,7 @@ With all our love,
   ],
 
   familyMembers: [
-    { name: "Siyama", role: "The Heart of the Family ❤️", position: "center" },
-    { name: "Member 1", role: "Son", position: "top-left" },
-    { name: "Member 2", role: "Daughter", position: "top-right" },
-    { name: "Member 3", role: "Loved One", position: "bottom-left" },
-    { name: "Member 4", role: "Loved One", position: "bottom-right" }
+    { name: "Siyama", role: "The Heart of the Family ❤️", position: "center" }
   ],
 
   finalMessage: "My biggest wish is to have you with me for many, many more birthdays. ❤️\nYou deserve the whole universe, Siyama.",
