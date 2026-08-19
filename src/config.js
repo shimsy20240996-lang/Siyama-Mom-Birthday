@@ -1,7 +1,12 @@
 const memoryModules = import.meta.glob('./assets/memories/*.{jpg,JPG,jpeg,png}', { eager: true });
 const memoryPhotos = Object.values(memoryModules).map(module => module.default);
 
-import vappaAvatar from './assets/vappa-avatar.jpg';
+const avatarModules = import.meta.glob('./assets/avatars/*.{jpg,JPG,jpeg,png}', { eager: true });
+const avatarPhotos = {};
+Object.keys(avatarModules).forEach(path => {
+  const filename = path.split('/').pop().split('.')[0].toLowerCase();
+  avatarPhotos[filename] = avatarModules[path].default;
+});
 
 export const hameedFamilyConfig = {
   familyName: "Hameed Family",
@@ -26,7 +31,7 @@ You are at the heart of it.
 
 With all our love,
 
-**The Hameed Family ❤️**`,
+**The Hameed Family ? ,?**`,
   
   familyMessages: [
     {
@@ -54,29 +59,29 @@ With all our love,
   ],
 
   familyVoiceWishes: [
-    { name: "Vappa", relationship: "Wife", wish: "Happy birthday, my dear wife. May Allah bless you with many more beautiful years.", voice: "male-warm", photo: vappaAvatar },
-    { name: "Peryappa", relationship: "Maini", wish: "Happy birthday, my dear Maini.", voice: "male-deep" },
-    { name: "Peryamma", relationship: "Thankachi", wish: "Happy birthday, my dear Thankachi.", voice: "female-warm" },
-    { name: "Hilmy Mama", relationship: "Thaaththah", wish: "Happy birthday, my dear Thaaththah.", voice: "male-warm" },
-    { name: "Hismy Mama", relationship: "Thaaththah", wish: "Happy birthday, my dear Thaaththah.", voice: "male-warm" },
-    { name: "Rasmy Mama", relationship: "Thaaththah", wish: "Happy birthday, my dear Thaaththah.", voice: "male-warm" },
-    { name: "Rifaya Mami", relationship: "Maini", wish: "Happy birthday, my dear Maini.", voice: "female-warm" },
-    { name: "Rihanna Mami", relationship: "Maini", wish: "Happy birthday, my dear Maini.", voice: "female-warm" },
-    { name: "Rinosa Mami", relationship: "Maini", wish: "Happy birthday, my dear Maini.", voice: "female-warm" },
-    { name: "Sanath Bro", relationship: "Sachimma", wish: "Happy birthday, my dear Sachimma.", voice: "male-young" },
-    { name: "Atheeba Maini", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "female-young" },
-    { name: "Rees Bro", relationship: "Umma", wish: "Happy birthday, my dear Umma.", voice: "male-young" },
-    { name: "Nibal Maini", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "female-young" },
-    { name: "Has Bro", relationship: "Sachimma", wish: "Happy birthday, my dear Sachimma.", voice: "male-young" },
-    { name: "Shim Bro", relationship: "Umma", wish: "Happy birthday, my dear Umma.", voice: "male-young" },
-    { name: "Asky", relationship: "Sachimma", wish: "Happy birthday, my dear Sachimma.", voice: "male-young" },
-    { name: "Hefad", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "male-young" },
-    { name: "Hamdhan", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "male-young" },
-    { name: "Sara", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "female-young" },
-    { name: "Reesath", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "male-young" },
-    { name: "Hudhaif", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "male-young" },
-    { name: "Aysha", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "female-young" },
-    { name: "Saadh", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "male-young" },
+    { name: "Vappa", relationship: "Wife", wish: "Happy birthday, my dear wife. May Allah bless you with many more beautiful years.", voice: "male-warm", photo: avatarPhotos['vappa'] },
+    { name: "Peryappa", relationship: "Maini", wish: "Happy birthday, my dear Maini.", voice: "male-deep", photo: avatarPhotos['peryappa'] },
+    { name: "Peryamma", relationship: "Thankachi", wish: "Happy birthday, my dear Thankachi.", voice: "female-warm", photo: avatarPhotos['peryamma'] },
+    { name: "Hilmy Mama", relationship: "Thaaththah", wish: "Happy birthday, my dear Thaaththah.", voice: "male-warm", photo: avatarPhotos['hilmy'] },
+    { name: "Hismy Mama", relationship: "Thaaththah", wish: "Happy birthday, my dear Thaaththah.", voice: "male-warm", photo: avatarPhotos['hismy'] },
+    { name: "Rasmy Mama", relationship: "Thaaththah", wish: "Happy birthday, my dear Thaaththah.", voice: "male-warm", photo: avatarPhotos['rasmy'] },
+    { name: "Rifaya Mami", relationship: "Maini", wish: "Happy birthday, my dear Maini.", voice: "female-warm", photo: avatarPhotos['rifaya'] },
+    { name: "Rihanna Mami", relationship: "Maini", wish: "Happy birthday, my dear Maini.", voice: "female-warm", photo: avatarPhotos['rihana'] },
+    { name: "Rinosa Mami", relationship: "Maini", wish: "Happy birthday, my dear Maini.", voice: "female-warm", photo: avatarPhotos['rinosa'] },
+    { name: "Sanath Bro", relationship: "Sachimma", wish: "Happy birthday, my dear Sachimma.", voice: "male-young", photo: avatarPhotos['sanath'] },
+    { name: "Atheeba Maini", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "female-young", photo: avatarPhotos['atheeba'] },
+    { name: "Rees Bro", relationship: "Umma", wish: "Happy birthday, my dear Umma.", voice: "male-young", photo: avatarPhotos['rees'] },
+    { name: "Nibal Maini", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "female-young", photo: avatarPhotos['nibal'] },
+    { name: "Has Bro", relationship: "Sachimma", wish: "Happy birthday, my dear Sachimma.", voice: "male-young", photo: avatarPhotos['has'] },
+    { name: "Shim Bro", relationship: "Umma", wish: "Happy birthday, my dear Umma.", voice: "male-young", photo: avatarPhotos['shim'] },
+    { name: "Asky", relationship: "Sachimma", wish: "Happy birthday, my dear Sachimma.", voice: "male-young", photo: avatarPhotos['asky'] },
+    { name: "Hefad", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "male-young", photo: avatarPhotos['hefad'] },
+    { name: "Hamdhan", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "male-young", photo: avatarPhotos['hamdhan'] },
+    { name: "Sara", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "female-young", photo: avatarPhotos['sara'] },
+    { name: "Reesath", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "male-young", photo: avatarPhotos['reesath'] },
+    { name: "Hudhaif", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "male-young", photo: avatarPhotos['hudu'] },
+    { name: "Aysha", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "female-young", photo: avatarPhotos['aysha'] },
+    { name: "Saadh", relationship: "Mami", wish: "Happy birthday, my dear Mami.", voice: "male-young", photo: avatarPhotos['saadh'] },
     { name: "Rasmiya", relationship: "Mami", wish: "", voice: "female-young", status: "loading" }
   ],
 
