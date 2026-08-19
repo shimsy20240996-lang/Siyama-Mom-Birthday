@@ -31,7 +31,7 @@ const WishSection = ({ finalMessage, onComplete }) => {
             {[...Array(20)].map((_, i) => (
               <motion.div
                 key={`petal-${i}`}
-                className="absolute w-4 h-4 bg-[#E3B7AD] rounded-full opacity-60 mix-blend-multiply blur-[1px]"
+                className="absolute w-3 h-3 bg-[#E3B7AD] rounded-full opacity-30 mix-blend-multiply blur-[1px]"
                 style={{
                   borderRadius: '50% 0 50% 50%',
                   left: `${Math.random() * 100}%`,
@@ -52,14 +52,14 @@ const WishSection = ({ finalMessage, onComplete }) => {
             {[...Array(30)].map((_, i) => (
               <motion.div
                 key={`gold-${i}`}
-                className="absolute w-2 h-2 bg-[#D4AF37] rounded-full shadow-[0_0_10px_#D4AF37]"
+                className="absolute w-1.5 h-1.5 bg-[#D4AF37] rounded-full shadow-[0_0_6px_#D4AF37]"
                 style={{
                   left: `${Math.random() * 100}%`,
                   top: '100%'
                 }}
                 animate={{
                   y: ['0vh', '-100vh'],
-                  opacity: [1, 0],
+                  opacity: [0.5, 0],
                 }}
                 transition={{
                   duration: Math.random() * 3 + 3,

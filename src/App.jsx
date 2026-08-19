@@ -12,6 +12,7 @@ import FamilyTree from './components/FamilyTree';
 import WishSection from './components/WishSection';
 import FinalCelebration from './components/FinalCelebration';
 import MusicToggle from './components/MusicToggle';
+import FloatingMemories from './components/FloatingMemories';
 import './App.css';
 
 // Global audio instance so we can play it synchronously
@@ -59,8 +60,10 @@ function App() {
   };
 
   return (
-    <div className="app-container">
+    <div className="app-container relative">
       <ParticleBackground />
+      <FloatingMemories />
+      
       <MusicToggle 
         isPlaying={isMusicPlaying}
         onToggle={toggleMusic}
@@ -77,34 +80,35 @@ function App() {
       <AnimatePresence>
         {hasEntered && !showFinal && (
           <motion.div key="main-content" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, filter: 'blur(10px)' }} transition={{ duration: 1.5, delay: 0.5 }}>
-            <div id="home" className="pt-10">
-              
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.9, y: 50 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ duration: 1.5, type: "spring", bounce: 0.4 }}
-                className="text-center z-10 p-12 md:p-20 rounded-3xl bg-[#FFF9F5]/90 backdrop-blur-md border border-[#E5C1B8] shadow-2xl max-w-4xl mx-auto w-full relative overflow-hidden mt-10 mb-20"
-                style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/cream-paper.png")' }}
-              >
-                <div className="absolute -top-32 -left-32 w-64 h-64 bg-[#E3B7AD]/40 rounded-full blur-[80px]" />
-                <div className="absolute -bottom-32 -right-32 w-64 h-64 bg-[#F4D9D0]/40 rounded-full blur-[80px]" />
+            <div id="home" className="pt-10 relative z-10 pointer-events-none">
+              <div className="pointer-events-auto">
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.9, y: 50 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ duration: 1.5, type: "spring", bounce: 0.4 }}
+                  className="text-center z-10 p-12 md:p-20 rounded-3xl bg-[#FFF9F5]/90 backdrop-blur-md border border-[#E5C1B8] shadow-2xl max-w-4xl mx-auto w-full relative overflow-hidden mt-10 mb-20"
+                  style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/cream-paper.png")' }}
+                >
+                  <div className="absolute -top-32 -left-32 w-64 h-64 bg-[#E3B7AD]/40 rounded-full blur-[80px]" />
+                  <div className="absolute -bottom-32 -right-32 w-64 h-64 bg-[#F4D9D0]/40 rounded-full blur-[80px]" />
 
-                <h1 className="text-5xl md:text-7xl font-serif text-[#6C4C4A] mb-6 leading-tight relative z-10">
-                  Happy Birthday,<br/> <span className="text-[#AD7466] text-6xl md:text-8xl mt-6 inline-block font-bold">Siyama ❤️</span>
-                </h1>
-                <p className="text-xl md:text-2xl text-[#8E706B] font-sans tracking-wide mb-16 font-light relative z-10">
-                  Today is all about you. Est. {hameedFamilyConfig.birthDate}
-                </p>
-              </motion.div>
+                  <h1 className="text-5xl md:text-7xl font-serif text-[#6C4C4A] mb-6 leading-tight relative z-10">
+                    Happy Birthday,<br/> <span className="text-[#AD7466] text-6xl md:text-8xl mt-6 inline-block font-bold">Siyama ❤️</span>
+                  </h1>
+                  <p className="text-xl md:text-2xl text-[#8E706B] font-sans tracking-wide mb-16 font-light relative z-10">
+                    Today is all about you. Est. {hameedFamilyConfig.birthDate}
+                  </p>
+                </motion.div>
 
-              <MessageSection message={hameedFamilyConfig.familyLetter} />
-              <FamilyMessages messages={hameedFamilyConfig.familyMessages} />
-              <MemoryGallery photos={hameedFamilyConfig.photos} />
-              <FamilyTimeline timeline={hameedFamilyConfig.timeline} />
-              <YouAreSection words={hameedFamilyConfig.youAre} />
-              <FamilyTree members={hameedFamilyConfig.familyMembers} />
-              
-              <WishSection finalMessage={hameedFamilyConfig.finalMessage} onComplete={handleCompleteWish} />
+                <MessageSection message={hameedFamilyConfig.familyLetter} />
+                <FamilyMessages messages={hameedFamilyConfig.familyMessages} />
+                <MemoryGallery photos={hameedFamilyConfig.photos} />
+                <FamilyTimeline timeline={hameedFamilyConfig.timeline} />
+                <YouAreSection words={hameedFamilyConfig.youAre} />
+                <FamilyTree members={hameedFamilyConfig.familyMembers} />
+                
+                <WishSection finalMessage={hameedFamilyConfig.finalMessage} onComplete={handleCompleteWish} />
+              </div>
             </div>
           </motion.div>
         )}
@@ -112,8 +116,10 @@ function App() {
 
       <AnimatePresence>
         {showFinal && (
-          <motion.div key="final" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }}>
-            <FinalCelebration onReplay={handleReplay} />
+          <motion.div key="final" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }} className="relative z-10 pointer-events-none">
+            <div className="pointer-events-auto">
+              <FinalCelebration onReplay={handleReplay} />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

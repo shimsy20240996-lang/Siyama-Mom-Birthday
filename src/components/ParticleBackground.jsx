@@ -50,22 +50,22 @@ const ParticleBackground = () => {
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute rounded-full bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)]"
+          className="absolute rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.4)]"
           style={{
             left: `${particle.x}%`,
             top: `${particle.y}%`,
-            width: particle.size,
-            height: particle.size,
-            opacity: particle.opacity,
+            width: particle.size * 0.6,
+            height: particle.size * 0.6,
+            opacity: particle.opacity * 0.5,
           }}
           animate={{
-            y: [0, -150, 0],
-            x: [0, Math.random() * 50 - 25, 0],
-            opacity: [particle.opacity, particle.opacity * 2, particle.opacity],
-            scale: [1, 1.5, 1],
+            y: [0, -100, 0],
+            x: [0, Math.random() * 30 - 15, 0],
+            opacity: [particle.opacity * 0.3, particle.opacity * 0.8, particle.opacity * 0.3],
+            scale: [1, 1.2, 1],
           }}
           transition={{
-            duration: particle.duration,
+            duration: particle.duration * 1.2,
             repeat: Infinity,
             ease: "easeInOut",
             delay: particle.delay,
